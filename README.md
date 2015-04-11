@@ -1,0 +1,2 @@
+# jspractice
+practice of javascript 
