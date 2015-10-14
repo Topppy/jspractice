@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			background-color: red;
+			filter:alpha(opacity:30);
+			opacity:0.3;
+			position:absolute;
+			height:200px;
+			width:200px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script>
+		window.onload = function () {
+			var box =document.getElementById("box");
+			box.onmouseover=function () {
+				opacitychange(100);
+			}
+			box.onmouseout = function () {
+				opacitychange(30);
+			}
+		}
+		var timer = null;
+		var alpha=30;
+		function opacitychange(iTarget){
+			var box =document.getElementById("box");
+			
+			clearInterval(timer);
+			timer = setInterval(function(){
+				var speed = 0;
+				if(alpha<iTarget){
+					speed=5;
+				}else{
+					speed=-5;
+				}
+				if (alpha==iTarget){
+					clearInterval(timer);
+				}else{
+					alpha+=speed;
+					box.style.filter='alpha(opacity:'+alpha+')';
+					box.style.opacity=alpha/100;
+				}
+				box.opacity
+			},20);
+		}
+	</script>
+</body>
+</html>
