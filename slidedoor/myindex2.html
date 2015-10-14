@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin:0;padding:0;
+		}
+		div{
+			position: relative;
+			margin-left:50px;
+			overflow:hidden;
+			height:477px;
+			width:957px;
+		}
+		img{
+			position:absolute;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="slidedoor">
+		<img src="./images/door1.png" alt="1080P神器">
+		<img src="./images/door2.png" alt="5.5寸四核">
+		<img src="./images/door3.png" alt="【2.2聚划算】四核5寸">
+		<img src="./images/door4.png" alt="5.7寸机皇">
+	</div>
+	<script type="text/javascript">
+	window.onload=function(){
+		//确保在所有文档加载完毕后执行
+		var  slide=document.getElementById("slidedoor");
+		var imgarr=slide.getElementsByTagName("img");
+		var imgWidth=imgarr[0].offsetWidth;
+		var exposeWidth= 160;
+		var slideWidth=imgWidth+exposeWidth*(imgarr.length-1);
+		var tanslateWidth=imgWidth-exposeWidth;
+		slide.style.width=slideWidth+"px";
+		var lefts=[[0,imgWidth,imgWidth+exposeWidth,imgWidth+exposeWidth*2],							  [0,exposeWidth,imgWidth+exposeWidth,imgWidth+exposeWidth*2],							  [0,exposeWidth,exposeWidth*2,imgWidth+exposeWidth*2],
+				  [0,exposeWidth,exposeWidth*2,exposeWidth*3]]
+		//图片初始化位置
+		function reset() {
+			for(var i=1;i<imgarr.length;i++){
+				imgarr[i].style.left=imgWidth+(i-1)*exposeWidth+"px";
+			}
+		}
+		reset();
+		for(var i= 0;i<imgarr.length;i++){
+			(function(i){
+				//立即调用函数确保每个img获得各自的函数，为了获得不同i值。
+				imgarr[i].onmouseover=function(){
+					var ci=this;
+					var n;
+					for(var i=0;i<imgarr.length;i++){
+						if(ci==imgarr[i])
+							n=i;
+					}
+					var left=lefts[n];
+					for(var j=1;j<imgarr.length;j++){
+						(function(j){
+							var timer=timers[j];
+							if(timer!=null) clearInterval(timer);
+							timers[j]=move(left[j],imgarr[j]);
+						})(j);
+						
+					}
+				}
+			})(i);
+		}
+	}
+	var timers=[];
+	function move(itarget,box){
+			//clearInterval(timer);
+			//var box=document.getElementById("box");
+			var timer=setInterval(function(){
+				var speed=0;
+				if(box.offsetLeft>itarget){
+					speed=-5;
+				}else {
+					speed=5;
+				}
+				if(box.offsetLeft==itarget){
+					clearInterval(timer);
+				}else{
+					box.style.left=box.offsetLeft+speed+"px";
+				}
+			}, 0.01);
+
+			return timer;
+
+		}
+	</script>
+</body>
+</html>
