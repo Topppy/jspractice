@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{
+			background:gray;
+			position:absolute;
+			height:200px;
+			width:200px;
+			left:-200px;
+			top:50px;
+		}
+		span{
+			background:green;
+			display: block;
+			position:relative;
+			left:200px;
+			top:85px;
+			height:30px;
+			width:50px;
+		}
+	</style>
+</head>
+<body>
+	<div id="box"><span>share</span></div>
+	<script>
+		//timer设置为全局变量，让mouseo和mouseout共同调用，否则div会左右晃动
+		var timer  =null;
+		//加载完毕后开始函数
+		window.onload=function (){
+			var box=document.getElementById("box");
+
+			box.onmouseover =function () {
+				move(0);
+			};
+			box.onmouseout = function () {
+				move(-200);
+			}
+		}
+		function move(itarget){
+			clearInterval(timer);
+			var box=document.getElementById("box");
+			timer=setInterval(function(){
+				var speed=(itarget-box.offsetLeft)/5;
+				//这里速度会变成一个小数，导致box不能完全弹出或完全收回
+				//ceil（）和floor（）分别向上取整和向下取整
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				if(box.offsetLeft==itarget){
+					clearInterval(timer);
+				}else{
+					box.style.left=box.offsetLeft+speed+"px";
+				}
+			}, 30);
+
+			
+
+		}
+	</script>
+</body>
+</html>
