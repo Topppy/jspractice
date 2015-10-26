@@ -9,3 +9,5 @@
 5. 模糊滤镜
 
 * 点击X退出编辑
+ 
+![gif](asset/imgprocessing.gif)
