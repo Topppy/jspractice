@@ -1,3 +1,4 @@
+//JS原生代码实现
 window.onload=function(){
 	//获取idmain下的类box
 	waterfall('main','box');
@@ -38,7 +39,7 @@ function waterfall(parent,box){
 		if(i<cols){
 			hArr.push(oBoxs[i].offsetHeight);
 		}else{
-			var minH=Math.min.apply(null,hArr);
+			var minH=Math.min.apply(null,hArr);//重点apply的应用
 			var index = getMinhIndex(hArr,minH);
 			oBoxs[i].style.position='absolute';
 			oBoxs[i].style.top=minH+'px';
