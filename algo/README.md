@@ -1,2 +1,2 @@
-#algorithm prictice
+#algorithm practice
 write in js
