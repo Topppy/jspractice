@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>binarySearchTree</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    //
+    function BinarySearchTree(){
+        //二叉搜索树的构造函数
+        //@param {Number} key 要生成的键值
+        var Node = function (key){
+            this.key=key
+            this.left=null
+            this.right=null
+        }
+        //
+        var root=null
+        //
+        this.insert=function(key){
+            var newNode=new Node(key)
+            if(root===null){
+                root=newNode
+            }else{
+                insertNode(root,newNode)
+            }
+        }
+        //
+        var insertNode=function(node,newNode){
+            if(newNode.key<node.key){
+                if(node,left===null){
+                    node.left=newNode
+                }else{
+                    insertNode(node.left,newNode)
+                }
+            }else{
+                if(node.right===null){
+                    node.right=newNode
+                }else{
+                    insertNode(node.right,newNode)
+                }
+            }
+        }
+        //
+        var printNode=function(value){
+            console.log(value);
+        }
+        //
+        this.inOrderTraverse=function(callback){
+            inOrderTraverseNode(root,callback)
+        }
+        //
+        var inOrderTraverseNode=function(node,callback){
+            if (node!=null){
+                inOrderTraverseNode(node.left,callback)
+                callback(node.key)
+                inOrderTraverseNode(node.right,callback)
+            }
+        }
+        //
+        this.preOrderTrancerse=function(callback){
+            preOrderTrancerse(root,callback)
+        }
+        //
+        var preOrderTrancerseNode=function(node,callback){
+            if(node!=null){
+                callback(node.key)
+                preOrderTrancerseNode(node.left,callback)
+                preOrderTrancerseNode(node.right,callback)
+            }
+        }
+        //
+        this.postOrderTranverse=function(callback){
+            postOrderTranverseNode(root,callback)
+        }
+        //
+        var postOrderTranverseNode=function (node,callback){
+            if(node!=null){
+                preOrderTrancerseNode(node.left,callback)
+                preOrderTrancerseNode(node.right,callback)
+                callback(node.key)
+            }
+        }
+        //
+        this.min=function(){
+            return minNode(root)
+        }
+        //
+        var minNode=function(node){
+            if(node){
+                while(node&&node.left!=null){
+                    node=node.left
+                }
+            return node.key
+            }else{
+                return null
+            }
+        }
+        //
+        this.max=function(){
+            return maxNode(root)
+        }
+        //
+        var maxNode=function(node){
+            if(node){
+                while(node&&node.right!=null){
+                    node=node.right
+                }
+                return node.key
+            }else{
+                return null
+            }
+        }
+        //
+        this.search=function(key){
+            return searchNode(root,key)
+        }
+        //
+        var searchNode=function(node,key){
+            if(node===null){
+                return false
+            }else if(key<node.key){
+                searchNode(node.left,key)
+            }else if(key>node.key){
+                searchNode(node.right,key)
+            }else{
+                return true
+            }
+        }
+        //
+         this.remove=function(key){
+            root=removeNode(root,key)
+         }
+        //
+        var removeNode=function (root,key){
+            if(root===null){
+                return null
+                }
+            // 未找到节点前，继续递归调用。
+            if (key < node.key) {
+                node.left = removeNode(node.left, key)
+                return node;
+                } else if (key > node.key) {
+                node.right = removeNode(node.right, key)
+                return node;
+                } else {
+            // 第一种场景：只是一个叶节点
+            // 这种情况只需要直接把节点赋值为null即可
+                    if (node.left === null && node.right === null) {
+                        node = null;
+                // 处理完直接return节点
+                        return node;
+                        }
+            // 第二种场景：有一个子节点
+            // 如果左节点为null，则代表右节点存在。
+            // 于是把当前节点赋值为存在的那个子节点
+                    if (node.left === null) {
+                        node = node.right;
+                // 处理完直接return节点
+                        return node;
+                        } else if (node.right == null) {
+                            node = node.left;
+                // 处理完直接return节点
+                            return node;
+                            }
+            // 第三种场景：有两个子节点
+            // 首先加入辅助节点，同时找寻右子节点中的最小节点
+            // 并把当前节点替换为右子节点中的最小节点
+            // 同时为了避免节点重复，移除右子节点中的最小节点
+                var aux = findMinNode(node.right);
+                node.key = aux.key;
+                node.right = removeNode(node.right, aux.key);
+                // 处理完直接return节点
+                return node;
+            }
+        }
+            /**
+               * remove函数的辅助函数
+               * @param  {Node} node 查找开始的节点，默认为root
+               * @return {Node}      最小的节点
+               */
+            var findMinNode = function(node) {
+            // 如果node存在，则开始搜索。能避免树的根节点为Null的情况
+                if (node) {
+            // 只要树的左侧子节点不为null，则把左子节点赋值给当前节点。
+            // 若左子节点为null，则该节点肯定为最小值。
+                    while (node && node.left !== null) {
+                            node = node.left;
+                    }
+                    return node;
+                }
+                    return null;
+              }
+            }
+        
+        //
+        //
+        //
+        //
+    //
+    //
+</script>
+</body>
+</html>

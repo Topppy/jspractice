@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>binarySearch_Gcd_Pow</title>
+</head>
+<body>
+    <h5>二分查找<br></h5>
+    <p id="bs"></p>
+    <h5>欧几里德算法</h5>
+    <p id="gcd"></p>
+    <h5>幂运算</h5>
+    <p id="pow"></p>
+    <script type="text/javascript">
+
+    //二分查找
+    function binarySearch(arr,x){
+        var end=arr.length,start=0
+        var mid
+        while(start<=end){
+            mid= Math.floor((start+end)/2)
+            if(x<arr[mid]){
+                end=mid
+            }else if(x>arr[mid]){
+                start=mid
+            }else{
+                return mid
+            }
+        }
+        return -1
+    }
+    //欧几里德算法------计算最大公因数
+    function gcd(bigValue,smallValue){
+        var rem
+        while(smallValue>0){
+            rem=bigValue%smallValue
+            bigValue=smallValue
+            smallValue=rem
+        }
+        return bigValue
+    }
+    //幂运算
+    function pow(value,order){
+        if(order==0){
+            return 1
+        }
+        if(order%2==0){
+            return pow(value*value,order/2)
+        }else{
+            return pow(value,order-1)*value
+        }
+
+    }
+    //test
+    window.onload=function(){
+        sortedArr=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+        value=13
+        var p=document.getElementsByTagName("p")
+        var ans=[]
+        ans[0]=binarySearch(sortedArr,value)
+        ans[1]=gcd(1989,1590)
+        ans[2]=pow(2,11)
+        for(var i=0;i<3;i++){
+            p[i].innerHTML=ans[i]
+        }
+    }
+
+    </script>
+</body>
+</html>

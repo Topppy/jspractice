@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>maxSubSum</title>
+</head>
+<body>
+    <h4 id="input">最小子序列和问题求解 <br> Array : [1,-5,6,-8,9,11,-8,-5,-15,5,24,12,-11,-5,4,5,7,-9,-1,0,2]</h4>
+    <h5>穷举法O(N^3)</h5>
+    <p id="n3"></p>
+    <h5>穷举法改进O(N^2)</h5>
+    <p id="n2"></p>
+    <h5>分治法O(NlogN)</h5>
+    <p id="nlogn"></p>
+    <h5>动态规划法O(N)</h5>
+    <p id="n"></p>
+
+    <script type="text/javascript">
+        var inputArr=[1,-5,6,-8,9,11,-8,-5,-15,5,24,12,-11,-5,4,5,7,-9,-1,0,2]
+        //穷举法
+        function n3(arr){
+            var len=arr.length
+            var tempSum,maxSum=0
+            var i,j,k
+            for(i=0;i<len;i++){
+                for(j=i;j<len;j++){
+                    tempSum=0
+                    for(k=i;k<j;k++){
+                        tempSum+=arr[k]
+                        if(tempSum>maxSum){
+                            maxSum=tempSum
+                        }
+                    }
+                }
+            }
+            return maxSum
+        }
+        //穷举法改进
+        function n2(arr){
+            var len=arr.length
+            var tempSum,maxSum=0
+            var i,j,k
+            for(i=0;i<len;i++){
+                tempSum=0
+                for(j=i;j<len;j++){
+                    tempSum+=arr[j]
+                    if(tempSum>maxSum){
+                        maxSum=tempSum
+                    }
+                }
+            }
+            return maxSum
+        }
+        //分治法
+        //function nlogn(arr){
+            //var len=arr.length
+        function nlogn(arr){
+            var len=arr.length
+            //基准情况
+            if(len <=1){
+                return (arr[0]>0?arr[0]:0)
+            }
+            //左右各部分最大和
+            var center=Math.floor(len/2)
+            var left=arr.slice(0,center),
+                  right=arr.slice(center)
+            var maxLeftSum=nlogn(left)
+            var maxRightSum=nlogn(right)
+            //跨中界最大和
+            var maxLeftBorderSum=0,leftBorderSum=0
+            var maxRightBorderSum=0,rightBorderSum=0
+            for (var i=center;i>0;i--){
+                leftBorderSum+=arr[i]
+                if(leftBorderSum>maxLeftBorderSum){
+                    maxLeftBorderSum=leftBorderSum                        
+                }
+            }
+            for(var i=center+1;i<len;i++){
+                rightBorderSum=arr[i]
+                if(rightBorderSum>maxRightBorderSum){
+                    maxRightBorderSum=rightBorderSum
+                }
+            }
+            //取三者中的最大值
+            return Math.max(maxLeftSum,maxRightSum,maxLeftBorderSum+maxRightBorderSum)
+        }
+        //动态规划法
+        function n(arr){
+            var len=arr.length
+            var tempSum=0,maxSum=0
+            for (var i=0;i<len;i++){
+                tempSum+=arr[i]
+                if(tempSum>maxSum){
+                    maxSum=tempSum
+                }else if (tempSum<0){
+                    tempSum=0
+                }
+            }
+            return maxSum
+        }
+        //测试
+        window.onload=function(){
+            var p=document.getElementsByTagName("p")
+            var ans=[]
+            ans[0]=n3(inputArr)
+            ans[1]=n2(inputArr)
+            ans[2]=nlogn(inputArr)
+            ans[3]=n(inputArr)
+
+            for(var i=0;i<4;i++){
+                p[i].innerHTML=ans[i]
+            }
+
+        }
+    </script>
+</body>
+</html>
