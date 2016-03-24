@@ -1,7 +1,7 @@
 #LeetCode easy questions [JavaScript]
 ##目录
-- [292. Nim Game](https://github.com/Topppy/jspractice/algo/leetcode#292-nim-game)
-- [258. Add Digits](https://github.com/Topppy/jspractice/algo/leetcode#258-add-digits)
+- [292. Nim Game](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#292-nim-game)
+- [258. Add Digits](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#258-add-digits)
 - [104. Maximum Depth of Binary Tree](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#104-maximum-depth-of-binary-tree)
 
 
