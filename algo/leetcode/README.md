@@ -3,6 +3,7 @@
 - [292. Nim Game](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#292-nim-game)
 - [258. Add Digits](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#258-add-digits)
 - [104. Maximum Depth of Binary Tree](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#104-maximum-depth-of-binary-tree)
+- [226. Invert Binary Tree](https://github.com/Topppy/jspractice/tree/master/algo/leetcode#226-invert-binary-tree)
 
 
 
@@ -66,6 +67,52 @@ var maxDepth = function(root) {
         return 0;
     }else{
         return Math.max.call(null,maxDepth(root.left),maxDepth(root.right))+1;
+    }
+};
+```
+
+##226. Invert Binary Tree
+Invert a binary tree.
+
+          4
+        /   \
+       2     7
+     /   \  /  \
+    1    3 6    9
+
+to
+
+          4
+        /   \
+       7     2
+     /   \  /  \
+    9    6 3    1
+
+
+Trivia:
+This problem was inspired by this original tweet by Max Howell:
+Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary tree on a whiteboard so fuck off.
+###solution
+```javascript
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function(root) {
+    if(root===null){
+        return root;
+    }else {
+        var temp=invertTree(root.left);
+        root.left=invertTree(root.right);
+        root.right=temp;
+        return root;
     }
 };
 ```
