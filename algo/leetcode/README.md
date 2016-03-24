@@ -1,6 +1,6 @@
 #LeetCode easy questions [JavaScript]
 
-- [292.Nim Game](https://github.com/Topppy/jspractice/edit/master/algo/leetcode/README.md#292.Nim Game)
+- [292.Nim Game](https://github.com/Topppy/jspractice/edit/master/algo/leetcode#292.Nim Game)
 
 
 
